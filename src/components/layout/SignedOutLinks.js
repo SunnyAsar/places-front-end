@@ -1,8 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const SignedOutLinks = () => {
   return (
-    <h1>Link 2</h1>
+    <div>
+      <ul className="nav justify-content-end">
+        <li className="nav-item">
+          <Link to="/logIn" className="nav-link">LogIn</Link>
+        </li>
+        <li className="nav-item">
+          <Link to='/signUp' className="nav-link">SignUp</Link>
+        </li>
+      </ul>
+    </div>
   )
 }
 
