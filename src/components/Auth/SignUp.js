@@ -29,8 +29,8 @@ form{
 
 class SignUp extends Component {
   state = {
-    first_name: '',
-    last_name: '',
+    first_name: 'sunny',
+    last_name: 'asar',
     email: '',
     password:'',
     password_confirmation: ''
@@ -51,9 +51,8 @@ class SignUp extends Component {
     return (
       <FormArea>
         <div className="container">
-          <h1 className="text-center"> Create an Account</h1>
-          <hr/>
           <form onSubmit={this.handleSubmit}>
+          <h1 className="text-center text-warning"> Create an Account</h1>
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label htmlFor="inputEmail4">First Name</label>
