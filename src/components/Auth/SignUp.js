@@ -1,12 +1,31 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import reg from '../../assets/images/reg.jpg'
 
 const FormArea = styled.div`
 display:flex;
+height:92.5vh;
+background: url(${reg});
+background-size:cover;
+background-position: center;
 justify-content: center;
-width:50%;
-margin:auto;
+.container{
+  width:50%;
+  margin:auto;
+}
+form{
+  background:  rgba(0, 0, 0, 0.5);
+  border-radius:5px;
+  padding:30px;
+  label{
+    color: silver;
+  }
+  button{
+    font-weight:600;
+  }
+}
 `
+// Photo by Philipp Kämmerer on Unsplash guy with hat
 
 class SignUp extends Component {
   state = {
@@ -33,6 +52,7 @@ class SignUp extends Component {
       <FormArea>
         <div className="container">
           <h1 className="text-center"> Create an Account</h1>
+          <hr/>
           <form onSubmit={this.handleSubmit}>
             <div className="form-row">
               <div className="form-group col-md-6">
@@ -58,7 +78,7 @@ class SignUp extends Component {
               <input type="password" value={this.state.password_confirmation}  onChange={this.handleChange} name="password_confirmation" className="form-control" id="exampleInputPassword2" placeholder="Confirm Password"/>
             </div>
             
-            <button type="submit" className="btn btn-block btn-outline-primary">Submit</button>
+            <button type="submit" className="btn btn-block btn-info">Let's Go</button>
           </form>
         </div>
       </FormArea>
