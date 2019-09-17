@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import signinBg from '../../assets/images/sig.jpg'
+import { connect } from 'react-redux'
+import { stop_loader } from '../../actions/loaderActions'
+import { apiSignIn } from '../../actions/authActions'
 
 const FormArea = styled.div`
 
@@ -35,6 +38,11 @@ class SignIn extends Component {
     password: ''
   }
 
+  componentDidMount(){
+    this.props.stopLoading()
+    console.log(` this is state in redux: ${this.props.userAccount}`)
+  }
+
 handleChange = (e) => {
   this.setState({
     [e.target.name]: e.target.value
@@ -43,6 +51,11 @@ handleChange = (e) => {
 handleSubmit = (e) => {
   e.preventDefault()
   console.log(this.state)
+  this.props.signInUser(this.state)
+    .then(this.setState({
+      email:'',
+      password:''
+    }))
 }
 
   render () {
@@ -72,4 +85,13 @@ handleSubmit = (e) => {
   }
 }
 
-export default SignIn
+const mapDispatchToProps = (dispatch) =>({
+  stopLoading: () => dispatch(stop_loader()),
+  signInUser: (user) => dispatch(apiSignIn(user))
+})
+
+const mapStateToProps = (state) => ({
+  userAccount: state.authentication
+})
+
+export default connect(null,mapDispatchToProps)(SignIn)

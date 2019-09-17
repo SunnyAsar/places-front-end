@@ -1,16 +1,19 @@
 import React from 'react';
 import Header from './layout/Header'
-import { BrowserRouter as Router, Route,Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import SignUp from './Auth/SignUp'
 import SignIn from './Auth/SignIn'
+import Loader from './layout/Loader'
 
-function App() {
+function App () {
   return (
     <Router>
       <Header/>
+      <Loader />
       <Switch>
-        <Route path='/signUp' component={SignUp} />
-        <Route path='/logIn' component={SignIn} />
+        <Route exact path='/' component={SignIn} />
+        <Route path='/signup' component={SignUp} />
+        <Route path='/login' component={SignIn} />
       </Switch>
     </Router>
   )

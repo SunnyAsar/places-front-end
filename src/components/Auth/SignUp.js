@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import reg from '../../assets/images/reg.jpg'
+import { connect } from 'react-redux'
+import { apiSignUp } from '../../actions/authActions'
+import { stop_loader } from '../../actions/loaderActions'
 
 const FormArea = styled.div`
 display:flex;
@@ -29,12 +32,18 @@ form{
 
 class SignUp extends Component {
   state = {
-    first_name: 'sunny',
-    last_name: 'asar',
+    first_name: '',
+    last_name: '',
     email: '',
     password:'',
     password_confirmation: ''
 
+  }
+
+  componentDidMount(){
+    setTimeout(()=>{
+      this.props.stopLoader()
+    },1000)
   }
 
   handleChange = (e) =>{
@@ -44,7 +53,17 @@ class SignUp extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state)
+    // console.log({user:this.state})
+    this.props.createUser({user:this.state})
+    .then(
+      this.setState({
+        first_name: '',
+        last_name: '',
+        email: '',
+        password:'',
+        password_confirmation: ''
+      })
+    )
   }
 
   render () {
@@ -85,4 +104,11 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createUser: (user) => dispatch(apiSignUp(user)),
+    stopLoader: () => dispatch(stop_loader())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(SignUp)

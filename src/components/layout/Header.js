@@ -4,6 +4,7 @@ import SignedInLinks from '../layout/SignedInLinks'
 import styled from '@emotion/styled'
 import Bg from '../../assets/images/bg2.jpg'
 import { Link } from "react-router-dom"
+import { connect } from 'react-redux'
 // import logo from '../../assets/images/logo512.png'
 
 // Photo by Miriam Höschele on Unsplash
@@ -24,7 +25,8 @@ const Block = styled.nav`
 }
 `
 
-const Header = () => {
+const Header = ({ authentication }) => {
+  const Navigation = authentication.token ? <SignedInLinks/> : <SignedOutLinks/>
   return (
     <Block>
       <div className="">
@@ -36,8 +38,7 @@ const Header = () => {
           <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div className="navbar-nav">
               <Link to="/help" className="nav-item nav-link" >Help</Link>
-              <SignedInLinks/>
-              <SignedOutLinks/>
+              { Navigation }
             </div>
           </div>
         </nav>
@@ -46,4 +47,8 @@ const Header = () => {
   )
 }
 
-export default Header
+const mapStateToProps = (state) => ({
+  authentication: state.authentication
+})
+
+export default connect(mapStateToProps, null)(Header)
