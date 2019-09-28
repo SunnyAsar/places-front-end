@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
-import { registerReducer, authenticationReducer } from './authReducer'
-import loader from './loaderReducer'
+import userReducer from './userReducer'
+import uiReducer from './uiReducer'
 
 const rootReducer = combineReducers({
-  register: registerReducer,
-  authentication: authenticationReducer,
-  loader
+  user: userReducer,
+  UI: uiReducer
+
 })
 
 export default rootReducer

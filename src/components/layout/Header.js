@@ -25,8 +25,8 @@ const Block = styled.nav`
 }
 `
 
-const Header = ({ authentication }) => {
-  const Navigation = authentication.token ? <SignedInLinks/> : <SignedOutLinks/>
+const Header = () => {
+  const Navigation = localStorage.getItem('Token') ? <SignedInLinks/> : <SignedOutLinks/>
   return (
     <Block>
       <div className="">

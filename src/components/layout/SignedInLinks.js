@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { logOutAction } from '../../actions/authActions'
+import { logOutUser } from '../../actions/userActions'
 
 const SignedInLinks = ({ logOutUser }) => {
   return (
@@ -19,7 +19,7 @@ const SignedInLinks = ({ logOutUser }) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  logOutUser: () => dispatch(logOutAction())
+  logOutUser: () => dispatch(logOutUser())
 })
 
 export default connect(null, mapDispatchToProps)(SignedInLinks)

@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import signinBg from '../../assets/images/sig.jpg'
 import { connect } from 'react-redux'
-import { stop_loader } from '../../actions/loaderActions'
-import { apiSignIn } from '../../actions/authActions'
+import { Redirect } from 'react-router-dom'
+
+// New stuff
+import { loginUser } from  '../../actions/userActions'
 
 const FormArea = styled.div`
 
@@ -35,13 +37,9 @@ form{
 class SignIn extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
   }
 
-  componentDidMount(){
-    this.props.stopLoading()
-    console.log(` this is state in redux: ${this.props.userAccount}`)
-  }
 
 handleChange = (e) => {
   this.setState({
@@ -51,14 +49,18 @@ handleChange = (e) => {
 handleSubmit = (e) => {
   e.preventDefault()
   console.log(this.state)
-  this.props.signInUser(this.state)
-    .then(this.setState({
-      email:'',
-      password:''
-    }))
+  const userData = { email: this.state.email, password: this.state.password }
+  const { history } = this.props
+  this.props.loginUser(userData,history)
+
 }
 
   render () {
+    if(localStorage.getItem('Token')) return <Redirect to='/'/>
+    const { UI: { loading, errors: { password,email } }}  = this.props 
+    const password_error = password ? ("is-invalid form-control") : ('form-control')
+    const email_error = email ? ("is-invalid form-control") : ('form-control')
+    const spinner = loading ? (<span className="spinner-border spinner-border-sm text-light"  role="status" aria-hidden="true"></span>) : ''
     return (
       <FormArea>
         <div className="container">
@@ -66,18 +68,19 @@ handleSubmit = (e) => {
           <h1 className="text-center text-warning"> - Hurry Up!</h1>
             <div className="form-group">
               <label htmlFor="exampleInputEmail1">Email address</label>
-              <input type="email" name="email" value={this.state.email} onChange={this.handleChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+              <input type="email" name="email" value={this.state.email} onChange={this.handleChange} className={email_error} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+              <div className="invalid-feedback">{email}</div>
+
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div className="form-group">
               <label htmlFor="exampleInputPassword1">Password</label>
-              <input type="password" name="password" value={this.state.password} onChange={this.handleChange} className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+              <input type="password" name="password" value={this.state.password} onChange={this.handleChange} className={password_error}
+               id="exampleInputPassword1" placeholder="Password"/>
+              <div className="invalid-feedback">{password}</div>
+
             </div>
-            {/* <div className="form-group form-check">
-              <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-              <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-            </div> */}
-            <button type="submit" className="btn btn-block btn-warning">Submit</button>
+            <button type="submit" disabled={loading} className="btn btn-block btn-warning"> {spinner} Submit</button>
           </form>
         </div>
       </FormArea>
@@ -86,12 +89,13 @@ handleSubmit = (e) => {
 }
 
 const mapDispatchToProps = (dispatch) =>({
-  stopLoading: () => dispatch(stop_loader()),
-  signInUser: (user) => dispatch(apiSignIn(user))
+  loginUser: (user, history) => dispatch(loginUser(user, history))
 })
 
 const mapStateToProps = (state) => ({
-  userAccount: state.authentication
+  userAccount: state.authentication,
+  user: state.user,
+  UI: state.UI
 })
 
-export default connect(null,mapDispatchToProps)(SignIn)
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
