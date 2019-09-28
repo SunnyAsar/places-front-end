@@ -4,6 +4,7 @@ const BASE_URL = 'http://localhost:4000'
 
 export const loginUser = (userData, history) => {
   return (dispatch) => {
+    dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: START_LOADER })
     axios.post(`${BASE_URL}/auth/login`, userData)
       .then(res => {
@@ -33,6 +34,7 @@ export const loginUser = (userData, history) => {
 
 export const signUpUser = (userData, history) => {
   return (dispatch) => {
+    dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: START_LOADER })
     axios.post(`${BASE_URL}/users`, userData)
       .then(res => {

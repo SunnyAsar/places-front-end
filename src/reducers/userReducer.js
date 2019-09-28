@@ -13,10 +13,6 @@ const initialState = {
 const user = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      // return {
-      //   ...state,
-      //   action.payload
-      // }
       return action.payload
     case UN_AUTHENTICATE_USER:
       return {

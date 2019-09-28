@@ -40,7 +40,6 @@ class SignIn extends Component {
     password: '',
   }
 
-
 handleChange = (e) => {
   this.setState({
     [e.target.name]: e.target.value
@@ -56,6 +55,7 @@ handleSubmit = (e) => {
 }
 
   render () {
+
     if(localStorage.getItem('Token')) return <Redirect to='/'/>
     const { UI: { loading, errors: { password,email } }}  = this.props 
     const password_error = password ? ("is-invalid form-control") : ('form-control')

@@ -3,7 +3,7 @@ import Header from './layout/Header'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import SignUp from './Auth/SignUp'
 import SignIn from './Auth/SignIn'
-import Activities from './Activities/Activities'
+import ActivitiesList from './Activities/ActivitiesList'
 // import axios from 'axios'
 
 // const token = localStorage.getItem('Token')
@@ -17,7 +17,7 @@ function App () {
       <Header/>
       {/* <Loader /> */}
       <Switch>
-        <Route exact path='/' component={Activities} />
+        <Route exact path='/' component={ActivitiesList} />
         <Route path='/signup' component={SignUp} />
         <Route path='/login' component={SignIn} />
       </Switch>

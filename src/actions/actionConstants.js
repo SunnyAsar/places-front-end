@@ -14,6 +14,8 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 export const SET_USER = 'SET_USER'
 export const UN_AUTHENTICATE_USER = 'UN_AUTHENTICATE_USER'
 
+export const SET_ACTIVITIES = 'SET_ACTIVITIES'
+
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 

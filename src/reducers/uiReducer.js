@@ -21,7 +21,7 @@ const loading = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        errors: null
+        errors: {}
       }
     default:
       return state
