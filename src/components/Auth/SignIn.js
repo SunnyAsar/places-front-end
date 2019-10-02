@@ -38,8 +38,16 @@ class SignIn extends Component {
   state = {
     email: '',
     password: '',
+    errors: {}
   }
 
+componentWillReceiveProps(nextProps){
+  if(nextProps.UI.errors){
+    this.setState({
+      errors: nextProps.UI.errors
+    })
+  }
+}
 handleChange = (e) => {
   this.setState({
     [e.target.name]: e.target.value
@@ -57,7 +65,9 @@ handleSubmit = (e) => {
   render () {
 
     if(localStorage.getItem('Token')) return <Redirect to='/'/>
-    const { UI: { loading, errors: { password,email } }}  = this.props 
+    // const { UI: { loading, errors: { password,email } }}  = this.props 
+    const { UI: { loading }}  = this.props 
+    const { errors: { password,email }} = this.state
     const password_error = password ? ("is-invalid form-control") : ('form-control')
     const email_error = email ? ("is-invalid form-control") : ('form-control')
     const spinner = loading ? (<span className="spinner-border spinner-border-sm text-light"  role="status" aria-hidden="true"></span>) : ''

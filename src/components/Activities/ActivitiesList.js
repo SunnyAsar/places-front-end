@@ -3,9 +3,11 @@ import { fetchActivities } from '../../actions/dataActions'
 import { connect } from 'react-redux'
 import styled from  '@emotion/styled'
 import Activity from './Activity'
-import activites from '../../reducers/dataReducer'
+import Loader from '../layout/Loader'
+import { Redirect } from 'react-router-dom'
 
 const Content = styled.div`
+with:100%;
 .card{
   border: none;
 }
@@ -23,8 +25,9 @@ class ActivitiesList extends Component {
   }
 
   render () {
-    const ActivityList = (this.props.activities.length > 0) ? (this.props.activities.map(activity => (<Activity activity={activity} key={activity.id} />))) : (<h3>There are no Listing now!</h3>)
-    // this.props.loading ? (<span className="spinner-border spinner-border-sm text-light"  role="status" aria-hidden="true"></span>) : ''
+    if (!localStorage.getItem('Token')) return <Redirect to='/login'/>
+    const ActivityList = (this.props.activities.length > 0) ? (this.props.activities.map(activity => (<Activity activity={activity} key={activity.id} />))) : (this.props.loading) ? (<Loader/>) : (<h3>There are no Listing now!</h3>)
+
     return (
       <Content>
         <div>
@@ -36,7 +39,7 @@ class ActivitiesList extends Component {
           </div>
           <div className="row mt-4">
             <div className="col-md-3 side">
-              <h3 className="text-center text-dark">Let's fine tune 😀 ✌️</h3>
+              <h3 className="text-center text-dark">Let's fine tune </h3>
             </div>
             <div className="col-md-9">
               <div className="row justify-content-between">
@@ -66,6 +69,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 const mapStateToProps = (state) => ({
   user: state.user,
+  loading: state.UI.loading,
   activities: state.data.activities
 })
 

@@ -25,8 +25,8 @@ const Block = styled.nav`
 }
 `
 
-const Header = () => {
-  const Navigation = localStorage.getItem('Token') ? <SignedInLinks/> : <SignedOutLinks/>
+const Header = ({ token }) => {
+  const Navigation = token ? <SignedInLinks/> : <SignedOutLinks/>
   return (
     <Block>
       <div className="">
@@ -48,7 +48,7 @@ const Header = () => {
 }
 
 const mapStateToProps = (state) => ({
-  authentication: state.authentication
+  token: state.user.token
 })
 
 export default connect(mapStateToProps, null)(Header)

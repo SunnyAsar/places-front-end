@@ -6,7 +6,7 @@ const BASE_URL = 'http://localhost:4000'
 export const fetchActivities = () => {
   return (dispatch) => {
     dispatch({ type: START_LOADER })
-    axios.get(`${BASE_URL}/activities`)
+    axios.get(`${BASE_URL}/activities`, { headers: { Authorization: localStorage.Token } })
       .then(res => {
         console.log(res)
         dispatch({ type: SET_ACTIVITIES, payload: res.data })

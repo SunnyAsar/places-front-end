@@ -8,6 +8,7 @@ const initialState = {
   email: '',
   id: '',
   created_at: ''
+
 }
 
 const user = (state = initialState, action) => {

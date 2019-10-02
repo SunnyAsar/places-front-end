@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import reg from '../../assets/images/reg.jpg'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-
 // New stuff
 import { signUpUser } from '../../actions/userActions'
 
@@ -52,7 +51,7 @@ class SignUp extends Component {
   }
 
   render () {
-    // if(localStorage.getItem('Token')) return <Redirect to='/'/>
+    if(localStorage.getItem('Token')) return <Redirect to='/'/>
     const { UI: { loading, errors: {email, password, password_confirmation,first_name, last_name } }} = this.props
     
 
