@@ -3,7 +3,9 @@ import headerImage from '../../assets/images/header.jpg'
 import styled from '@emotion/styled'
 import Loader from '../layout/Loader'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { fetchActivity } from '../../actions/dataActions'
+import CommentsList from '../Commenting/CommentsList'
 
 const Header = styled.div`
   background: url(${headerImage});
@@ -34,6 +36,7 @@ class Detail extends Component {
 
   render () {
     const { activity } = this.props
+    const comments = (activity && activity.comments.length > 0) ? (<CommentsList comments={ activity.comments }/>) : (<h3>There are no Review yes, Hey!, be the first!</h3>)
     return (activity === null) ? (<Loader/>) : (Object.entries(activity).length === 0) ? (<p>Something Horrible is happening</p>)
       : (
         <div>
@@ -60,68 +63,36 @@ class Detail extends Component {
                   <p className="p-3 description">
                     {activity.description}
                   </p>
+
+                  <div className="row">
+                    <h3> Guest Experience Review </h3>
+                    <div className="row p-5">
+                      <div>
+                        {comments}
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
                 <div className="col-md-4">
                   <h3>Book a Vistit</h3>
                   <form>
-                    <div class="form-group">
-                      <label for="formControlRange">Party Of how many</label>
-                      <input type="range" class="form-control-range" id="formControlRange"/>
+                    <div className="form-group">
+                      <label htmlFor="formControlRange">Party Of how many</label>
+                      <input type="range" className="form-control-range" id="formControlRange"/>
                     </div>
 
-                    <div class="form-group">
-                      <label for="inputAddress">When?</label>
-                      <input type="date" class="form-control" id="inputAddress" placeholder="1234 Main St"/>
+                    <div className="form-group">
+                      <label htmlFor="inputAddress">When?</label>
+                      <input type="date" className="form-control" id="inputAddress" placeholder="1234 Main St"/>
                     </div>
-                    <div class="form-group">
-                      <label for="inputAddress2">Other Information</label>
-                      <textarea type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></textarea>
+                    <div className="form-group">
+                      <label htmlFor="inputAddress2">Other Information</label>
+                      <textarea type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></textarea>
                     </div>
                   </form>
                 </div>
               </div>
-
-              <div className="row">
-                <h3> Guest Experience Review </h3>
-                <div>
-                  {/* <form>
-                    <div class="form-group">
-                      <label for="formControlRange">Party Of how many></label>
-                      <input type="range" class="form-control-range" id="formControlRange"/>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputAddress">When?</label>
-                      <input type="date" class="form-control" id="inputAddress" placeholder="1234 Main St"/>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputAddress2">Other Information</label>
-                      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"/>
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-4">
-                        <label for="inputState">Need of Pickup?</label>
-                        <select id="inputState" class="form-control">
-                          <option selected>Choose...</option>
-                          <option>Yes</option>
-                          <option>No</option>
-                        </select>
-                      </div>
-                     
-                    </div>
-                    <div class="form-group">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                        <label class="form-check-label" for="gridCheck">
-                          Check me out
-                        </label>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                  </form> */}
-
-                </div>
-              </div>
-
             </div>
           </Header>
         </div>
@@ -129,12 +100,22 @@ class Detail extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   activity: state.data.activity
+  // comments: state.data.activity.comments
 })
 
 const mapDispatchToProps = (dispatch) => ({
   fetchActivity: (id) => dispatch(fetchActivity(id))
 })
+
+Detail.defaultProps = {
+  likes: [],
+  comments: []
+}
+Detail.propTypes = {
+  comments: PropTypes.array,
+  likes: PropTypes.array
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Detail)
