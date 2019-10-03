@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import moment from 'moment'
 
 const Card = styled.div`
-width:auto;
+// width:auto;
 `
 
 class Comment extends Component {
@@ -11,11 +12,11 @@ class Comment extends Component {
     return (
       <Card>
         <div>
-          <div className="card ">
-            <div className="card-body">
+          <div className="card border-primary mb-3 ">
+            <div className="card-body p-3">
               <h5 className="card-title">{comment.author.first_name}</h5>
-              <p className="card-text">{comment.content}</p>
-              <h6 className="card-title float-right small">{comment.created_at}</h6>
+              <p className="card-text mb-2">{comment.content}</p>
+              <h6 className=" float-right text-secondary m-0">{moment(`${comment.created_at}`).fromNow()}</h6>
             </div>
           </div>
         </div>
