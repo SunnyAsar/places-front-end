@@ -16,7 +16,6 @@ function App () {
   return (
     <Router>
       <Header/>
-      {/* <Loader /> */}
       <Switch>
         <Route exact path='/' component={ActivitiesList} />
         <Route path='/signup' component={SignUp} />

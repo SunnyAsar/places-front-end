@@ -15,6 +15,7 @@ export const SET_USER = 'SET_USER'
 export const UN_AUTHENTICATE_USER = 'UN_AUTHENTICATE_USER'
 
 export const SET_ACTIVITIES = 'SET_ACTIVITIES'
+export const SET_ACTIVITY = 'SET_ACTIVITY'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
