@@ -29,7 +29,7 @@ export const fetchActivity = (id) => {
         dispatch({ type: STOP_LOADER })
       })
       .catch(err => {
-        console.log(err.response)
+        // console.log(err.response.data)
         dispatch({ type: SET_ERRORS, payload: err.response.data })
         dispatch({ type: STOP_LOADER })
       })
