@@ -35,8 +35,8 @@ class Detail extends Component {
   }
 
   render () {
-    const { activity } = this.props
-    // const comments = (activity && activity.comments.length > 0) ? (<CommentsList comments={ activity.comments }/>) : (<h3>There are no Review yes, Hey!, be the first!</h3>)
+    const { activity, comments } = this.props
+    const commentsList = (activity && comments.length > 0) ? (<CommentsList activity={activity} comments={ comments }/>) : (<h3>There are no Review yes, Hey!, be the first!</h3>)
     return (activity === null) ? (<Loader/>) : (Object.entries(activity).length === 0) ? (<p>Something Horrible is happening</p>)
       : (
         <div>
@@ -68,7 +68,7 @@ class Detail extends Component {
                     <h3> Guest Experience Review </h3>
                     <div className="row p-5">
                       <div>
-                        {/* {comments} */}
+                        { commentsList }
                       </div>
                     </div>
                   </div>
@@ -101,8 +101,8 @@ class Detail extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  activity: state.data.activity
-  // comments: state.data.activity.comments
+  activity: state.data.activity,
+  comments: state.data.comments
 })
 
 const mapDispatchToProps = (dispatch) => ({

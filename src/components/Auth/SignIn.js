@@ -64,7 +64,7 @@ handleSubmit = (e) => {
 
   render () {
 
-    if(localStorage.getItem('Token')) return <Redirect to='/'/>
+    // if(localStorage.getItem('Token')) return <Redirect to='/'/>
     // const { UI: { loading, errors: { password,email } }}  = this.props 
     const { UI: { loading }}  = this.props 
     const { errors: { password,email }} = this.state

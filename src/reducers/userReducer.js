@@ -2,12 +2,12 @@
 import { SET_USER, UN_AUTHENTICATE_USER } from "../actions/actionConstants"
 
 const initialState = {
-  token: '',
-  first_name: '',
-  last_name: '',
-  email: '',
-  id: '',
-  created_at: ''
+  // token: '',
+  // first_name: '',
+  // last_name: '',
+  // email: '',
+  // id: '',
+  // created_at: ''
 
 }
 

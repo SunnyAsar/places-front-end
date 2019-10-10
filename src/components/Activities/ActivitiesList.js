@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom'
 // import headerImage from '../../assets/images/header.jpg'
 import home1 from '../../assets/images/reg.jpg'
 // import home2 from '../../assets/images/home2.jpg'
-import { getUser } from '../../actions/userActions'
+// import { Current } from '../../index'
 
 const Content = styled.div`
   background: url(${home1});
@@ -43,7 +43,6 @@ const Content = styled.div`
 class ActivitiesList extends Component {
   componentDidMount () {
     this.props.fetchActivities()
-    // this.props.getUser()
   }
 
   render () {

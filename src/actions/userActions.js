@@ -1,4 +1,5 @@
 import axios from 'axios'
+import * as jwt_decode from 'jwt-decode'
 import { SET_ERRORS, SET_USER, START_LOADER, STOP_LOADER, CLEAR_ERRORS, UN_AUTHENTICATE_USER } from './actionConstants'
 const BASE_URL = 'http://localhost:4000'
 
@@ -12,14 +13,15 @@ export const loginUser = (userData, history) => {
         const { data: { token } } = res
         const { data: { user: { id, first_name, last_name, email, created_at } } } = res
         const userData = {
-          token: token,
-          first_name: first_name,
-          last_name: last_name,
-          email: email,
-          id: id,
-          created_at: created_at
+          token,
+          first_name,
+          last_name,
+          email,
+          id,
+          created_at
         }
-        localStorage.setItem('Token', token)
+        storeUser(JSON.stringify(token))
+        localStorage.setItem('Token', JSON.stringify(token))
         dispatch({ type: STOP_LOADER })
         dispatch({ type: SET_USER, payload: userData })
         history.push('/')
@@ -40,7 +42,7 @@ export const signUpUser = (userData, history) => {
       .then(res => {
         console.log(res.data)
         dispatch({ type: STOP_LOADER })
-        // dispatch({ type: CLEAR_ERRORS })
+        dispatch({ type: CLEAR_ERRORS })
         history.push('/login')
       })
       .catch(err => {
@@ -49,6 +51,22 @@ export const signUpUser = (userData, history) => {
         dispatch({ type: STOP_LOADER })
       })
   }
+}
+
+const storeUser = (token) => {
+  localStorage.setItem('Token', token)
+  const code = jwt_decode(token)
+  const { email, first_name, last_name, id } = JSON.parse(code.userData)
+  const user = {
+    id,
+    email,
+    first_name,
+    last_name,
+    exp: code.exp,
+    token: localStorage.Token
+  }
+  localStorage.setItem('User', JSON.stringify(user))
+  console.log(id)
 }
 
 export const logOutUser = () => {
