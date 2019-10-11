@@ -1,4 +1,4 @@
-import { SET_ACTIVITIES, SET_ACTIVITY, SET_COMMENTS } from '../actions/actionConstants'
+import { SET_ACTIVITIES, SET_ACTIVITY, SET_COMMENTS, SET_COMMENT } from '../actions/actionConstants'
 
 const initialState = {
   activities: [],
@@ -22,6 +22,11 @@ const activites = (state = initialState, action) => {
       return {
         ...state,
         comments: action.payload
+      }
+    case SET_COMMENT:
+      return {
+        ...state,
+        comments: [...state.comments, action.payload]
       }
     default:
       return state

@@ -6,9 +6,10 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { fetchActivity } from '../../actions/dataActions'
 import CommentsList from '../Commenting/CommentsList'
+import PostComment from '../Commenting/PostComment'
 
 const Header = styled.div`
-  background: url(${headerImage});
+  // background: url(${headerImage});
   background-size: cover;
   background-position: center;
   height:50vh;
@@ -36,14 +37,15 @@ class Detail extends Component {
 
   render () {
     const { activity, comments } = this.props
-    const commentsList = (activity && comments.length > 0) ? (<CommentsList activity={activity} comments={ comments }/>) : (<h3>There are no Review yes, Hey!, be the first!</h3>)
+    const commentsList = (activity && comments.length > 0) ? (<CommentsList comments={ comments }/>) : (<h3>There are no Review yes, Hey!, be the first!</h3>)
     return (activity === null) ? (<Loader/>) : (Object.entries(activity).length === 0) ? (<p>Something Horrible is happening</p>)
       : (
         <div>
-          <Header className="this">
+          <Header className="this" style={{ backgroundImage: `url(http://localhost:4000${activity.thumbnail})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '50vh'
+          }}>
             <div className="overlay d-flex align-items-center text-center">
               <div className="container ">
-                <h1 className="display-4 text-light">Top Activites. Curated Just for You. </h1>
+                <h1 className="display-4 text-light">{activity.name}</h1>
                 <p className="lead text-warning">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
               </div>
             </div>
@@ -65,7 +67,15 @@ class Detail extends Component {
                   </p>
 
                   <div className="row">
-                    <h3> Guest Experience Review </h3>
+                    <div className="col-md-7">
+                      <h4> Guest Experience Review </h4>
+                    </div>
+                    <div className="col-md-5">
+                      <button type="button" className="btn btn-secondary btn-block" data-toggle="modal"   data-target="#exampleModalCenter">Add a Comment</button>
+                      <PostComment/>
+                    </div>
+                  </div>
+                  <div className="row">
                     <div className="row p-5">
                       <div>
                         { commentsList }

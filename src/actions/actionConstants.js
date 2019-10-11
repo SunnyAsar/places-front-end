@@ -19,6 +19,7 @@ export const SET_ACTIVITIES = 'SET_ACTIVITIES'
 export const SET_ACTIVITY = 'SET_ACTIVITY'
 
 export const SET_COMMENTS = 'SET_COMMENTS'
+export const SET_COMMENT = 'SET_COMMENT'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'

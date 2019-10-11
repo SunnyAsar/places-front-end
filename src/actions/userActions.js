@@ -20,8 +20,10 @@ export const loginUser = (userData, history) => {
           id,
           created_at
         }
-        storeUser(JSON.stringify(token))
-        localStorage.setItem('Token', JSON.stringify(token))
+        // storeUser(JSON.stringify(token))
+        localStorage.setItem('Token', token)
+        localStorage.setItem('User', JSON.stringify(userData))
+        axios.defaults.headers.common['Authorization'] = token
         dispatch({ type: STOP_LOADER })
         dispatch({ type: SET_USER, payload: userData })
         history.push('/')
@@ -73,7 +75,7 @@ export const logOutUser = () => {
   return (dispatch) => {
     console.log('going out .......')
     localStorage.removeItem('Token')
-    dispatch({ type: UN_AUTHENTICATE_USER })
+    // dispatch({ type: UN_AUTHENTICATE_USER })
     window.location.href = '/login'
   }
 }

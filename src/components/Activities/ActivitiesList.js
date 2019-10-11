@@ -46,14 +46,14 @@ class ActivitiesList extends Component {
   }
 
   render () {
-    // if (!localStorage.getItem('Token')) return <Redirect to='/login'/>
+    if (!localStorage.getItem('Token')) return <Redirect to='/login'/>
+    const { userData } = this.props
     const ActivityList = (this.props.activities.length > 0) ? (this.props.activities.map(activity => (<Activity activity={activity} key={activity.id} />))) : (this.props.loading) ? (<Loader/>) : (<h3>There are no Listing now!</h3>)
-    // alert(this.props.activities.length)
     return (
       <Content>
         <div className="overlay d-flex align-items-center text-center">
           <div className="container ">
-            <h1 className="display-4 text-light">Top Activites. Curated Just for You.{this.props.user.first_name} </h1>
+            <h1 className="display-4 text-light">Top Activites. Curated Just for You.{this.props.user.first_name} { userData.first_name }</h1>
             <p className="lead text-warning">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
             <div className="row justify-content-center sticky-top">
               <div className="col-md-6">
@@ -97,7 +97,8 @@ const mapStateToProps = (state) => {
     user: state.user,
     authenticated: state.user.authenticated,
     loading: state.UI.loading,
-    activities: state.data.activities
+    activities: state.data.activities,
+    userData: JSON.parse(localStorage.User)
   }
 }
 

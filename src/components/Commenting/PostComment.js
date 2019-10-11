@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { postComment } from '../../actions/dataActions'
 
 class PostComment extends Component {
   state = {
@@ -12,8 +14,10 @@ class PostComment extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state)
+    const { activityId } = this.props
+    this.props.postComment({comment: this.state}, activityId)
     document.getElementById('closeBtn').click()
+
   }
 
   render () {
@@ -48,4 +52,16 @@ class PostComment extends Component {
   }
 }
 
-export default PostComment
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postComment : (comment, activityId) => dispatch(postComment(comment, activityId))
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    activityId: state.data.activity.id
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostComment)

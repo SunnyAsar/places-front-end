@@ -1,4 +1,4 @@
-import { SET_ACTIVITIES, START_LOADER, STOP_LOADER, SET_ERRORS, SET_ACTIVITY, SET_COMMENTS } from './actionConstants'
+import { SET_ACTIVITIES, START_LOADER, STOP_LOADER, SET_ERRORS, SET_ACTIVITY, SET_COMMENTS, SET_COMMENT } from './actionConstants'
 import axios from 'axios'
 
 const BASE_URL = 'http://localhost:4000'
@@ -38,11 +38,12 @@ export const fetchActivity = (id) => {
 
 export const fetchActivityCommnets = (activityId) => {
   return (dispatch) => {
-    axios.get(`${BASE_URL}/activities/${activityId}/comments`, { Authorization: localStorage.Token })
+    axios.get(`${BASE_URL}/activities/${activityId}/comments`, { headers: { Authorization: localStorage.Token } })
       .then(res => {
+        console.log(res.data)
         dispatch({ type: SET_COMMENTS, payload: res.data })
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err.response.data))
   }
 }
 
@@ -50,8 +51,9 @@ export const postComment = (data, activityId) => {
   return (dispatch) => {
     axios.post(`${BASE_URL}/activities/${activityId}/comments`, data, { headers: { Authorization: localStorage.Token } }).then(res => {
       console.log(res.data)
+      dispatch({ type: SET_COMMENT, payload: res.data })
     }).catch(err => {
-      console.log(err)
+      console.log(err.response.data)
     })
   }
 }

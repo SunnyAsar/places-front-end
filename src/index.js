@@ -30,8 +30,8 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 //   }
 //   return current_user
 // }
-const user1 = localStorage.User
-console.log(JSON.parse(user1))
+// const user1 = localStorage.User
+// console.log(JSON.parse(localStorage.User))
 
 ReactDOM.render(
   <Provider store={ store }>

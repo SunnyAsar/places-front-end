@@ -31,7 +31,7 @@ const Header = ({ token }) => {
     <Block>
       <div className="">
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top justify-content-end">
-          <Link to="/" className="navbar-brand">Navbar</Link>
+          <Link to="/" className="navbar-brand">Place</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -48,7 +48,7 @@ const Header = ({ token }) => {
 }
 
 const mapStateToProps = (state) => ({
-  token: state.user.token
+  token: localStorage.Token
 })
 
 export default connect(mapStateToProps, null)(Header)
