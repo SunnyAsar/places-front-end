@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import { fetchActivity } from '../../actions/dataActions'
 import CommentsList from '../Commenting/CommentsList'
 import PostComment from '../Commenting/PostComment'
+import PostReservation from '../Reservation/PostReservation'
 
 const Header = styled.div`
   // background: url(${headerImage});
@@ -85,22 +86,7 @@ class Detail extends Component {
 
                 </div>
                 <div className="col-md-4">
-                  <h3>Book a Vistit</h3>
-                  <form>
-                    <div className="form-group">
-                      <label htmlFor="formControlRange">Party Of how many</label>
-                      <input type="range" className="form-control-range" id="formControlRange"/>
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="inputAddress">When?</label>
-                      <input type="date" className="form-control" id="inputAddress" placeholder="1234 Main St"/>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="inputAddress2">Other Information</label>
-                      <textarea type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></textarea>
-                    </div>
-                  </form>
+                  <PostReservation activity={activity} />
                   <div className="row">
 
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/8vxJvFqw5Uo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
