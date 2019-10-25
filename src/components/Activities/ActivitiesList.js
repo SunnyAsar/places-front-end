@@ -18,6 +18,9 @@ const Content = styled.div`
   .card{
     border: none;
   }
+  .card-body{
+    padding: 0
+  }
 
   .overlay{
     height:100%;
@@ -72,7 +75,7 @@ class ActivitiesList extends Component {
             </div>
             <div className="col-md-10">
               <div className="container-fluid">
-                <div className="row mt-5">
+                <div className="row mt-5 p-0">
                   {ActivityList}
                 </div>
               </div>

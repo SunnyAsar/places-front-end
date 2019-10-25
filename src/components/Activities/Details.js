@@ -70,7 +70,7 @@ class Detail extends Component {
                     <div className="col-md-7">
                       <h4> Guest Experience Review </h4>
                     </div>
-                    <div className="col-md-5">
+                    <div className="col-md-5 px-5">
                       <button type="button" className="btn btn-secondary btn-block" data-toggle="modal"   data-target="#exampleModalCenter">Add a Comment</button>
                       <PostComment/>
                     </div>
@@ -101,6 +101,10 @@ class Detail extends Component {
                       <textarea type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></textarea>
                     </div>
                   </form>
+                  <div className="row">
+
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/8vxJvFqw5Uo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+                  </div>
                 </div>
               </div>
             </div>
