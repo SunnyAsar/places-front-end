@@ -36,11 +36,10 @@ See the [Backend](https://github.com/SunnyAsar/places) repo to get the server si
 
 ## Authors
 
-👤 **Author1**
+👤 **Author**
 
 - Github: [@SunnyAsar](https://github.com/SunnyAsar)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Linkedin: [Sunny Asar](https://www.linkedin.com/in/sunny-asar-905648101/)
 
 ## 🤝 Contributing
 
