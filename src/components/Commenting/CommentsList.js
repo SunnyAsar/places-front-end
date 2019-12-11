@@ -4,7 +4,7 @@ import Comment from './Comment'
 class CommentList extends Component {
   render () {
     const { comments } = this.props
-    const comment = comments.reverse().map(comment => <Comment comment={comment} key={comment.content} />)
+    const comment = comments.map(comment => <Comment comment={comment} key={comment.content} />)
     return (
       <div className="mb-5 row">
         <div className="col-md-12 pb-3 ">

@@ -3,7 +3,21 @@ import styled from '@emotion/styled'
 import moment from 'moment'
 
 const Card = styled.div`
-// width:auto;
+.card{
+  // width: auto;
+  margin: auto
+}
+.time{
+  font-size: 11px;
+}
+.content{
+ font-size: 14px; 
+}
+.card-title{
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
 `
 
 class Comment extends Component {
@@ -13,10 +27,10 @@ class Comment extends Component {
       <Card>
         <div>
           <div className="card border-primary mb-3 ">
-            <div className="card-body p-3">
-              <h5 className="card-title">{comment.author.first_name}</h5>
-              <p className="card-text mb-2">{comment.content}</p>
-              <h6 className=" float-right text-secondary m-0">{moment(`${comment.created_at}`).fromNow()}</h6>
+            <div className="card-body p-2">
+              <h6 className="card-title">{comment.author.first_name}</h6>
+              <p className="content card-text mb-1">{comment.content}</p>
+              <h6 className="time float-right text-secondary m-0">{moment(`${comment.created_at}`).fromNow()}</h6>
             </div>
           </div>
         </div>

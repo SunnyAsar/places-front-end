@@ -43,8 +43,11 @@ class PostReservation extends Component {
   render () {
     return(
       <div>
-         <h3>Book a Vistit</h3>
-          <form>
+         <h4>Book a Vistit</h4>
+
+         {this.props.activity.amount > 1 ?
+            (
+            <form>
             <div className="form-group">
               <label htmlFor="formControlRange">Party Of how many</label>
               <input type="number" name='party_size' onChange={this.handleChange} value={this.state.party_size} className="form-control" id="inputAddress" placeholder="The more the merrier remember..?"/>
@@ -63,6 +66,22 @@ class PostReservation extends Component {
               <button className='btn btn-warning btn-block' onClick={this.pay}> Book </button>
             </div>
           </form>
+
+           ) :
+           (
+
+            
+          <div className='form-group'>
+            <p>
+              They say the best things in life are free, well that's true. We know you have been through alot and this is one the house, have a wonserful time and be refreshed
+            </p>
+            <button className='btn  btn-success btn-block' disabled>Yay! it Free! </button>
+          </div>
+           )
+            
+          }
+         
+         
       </div>
     )
   }

@@ -14,7 +14,9 @@ const Header = styled.div`
   background-size: cover;
   background-position: center;
   height:50vh;
-
+  .title{
+    font-size: 10px; 
+  }
   .overlay{
     height:100%;
     opacity:1;
@@ -23,11 +25,9 @@ const Header = styled.div`
   .description{
     line-spacing:20px;
     color:#484848;
-    font-size: 18px;
+    font-size: 16px;
   }
 
-  
- 
 `
 
 class Detail extends Component {
@@ -46,7 +46,7 @@ class Detail extends Component {
           }}>
             <div className="overlay d-flex align-items-center text-center">
               <div className="container ">
-                <h1 className="display-4 text-light">{activity.name}</h1>
+                <h1 className=" display-4 text-light text-uppercase">{activity.name}</h1>
                 <p className="lead text-warning">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
               </div>
             </div>
@@ -55,28 +55,31 @@ class Detail extends Component {
             </div>
             <div className="container pt-3">
               <div className="row mb-3 container">
-                <p className="h4 pr-3"> <i className="fa fa-globe text-success" aria-hidden="true"></i>  <span className="text-secondary h5">{activity.country}</span></p>
-                <p className="h4"> <i className="fa fa-thumb-tack text-warning" aria-hidden="true"></i>  <span className="text-secondary h5">{activity.city}</span></p>
+                <p className="h4 pr-3"> <i className="fa fa-globe text-success" aria-hidden="true"></i>  <span className="text-secondary h6">{activity.country}</span></p>
+                <p className="h4"> <i className="fa fa-thumb-tack text-warning" aria-hidden="true"></i>  <span className="text-secondary h6">{activity.city}</span></p>
 
-                <p className="ml-5 h5">Strating: <span className="text-success h4">$25</span> </p>
+                {activity.amount > 1
+                  ? (<p className="ml-5 h6">Strating: <span className="text-success h5">$ {activity.amount}</span> </p>)
+                  : (<p className="ml-5 h6">Strating: <span className="text-success h5">Free</span> </p>)
+                }
               </div>
               <div className="row">
                 <div className="col-md-8">
-                  <span className="h4">What You'll Experience</span>
+                  <span className="h5">What You'll Experience</span>
                   <p className="p-3 description">
                     {activity.description}
                   </p>
 
-                  <div className="row">
+                  <div className="row mb-0">
                     <div className="col-md-7">
-                      <h4> Guest Experience Review </h4>
+                      <h5> Guest Experience Review </h5>
                     </div>
                     <div className="col-md-5 px-5">
                       <button type="button" className="btn btn-secondary btn-block" data-toggle="modal"   data-target="#exampleModalCenter">Add a Comment</button>
                       <PostComment/>
                     </div>
                   </div>
-                  <div className="row">
+                  <div className="row mt-1">
                     <div className="row p-5">
                       <div>
                         { commentsList }
