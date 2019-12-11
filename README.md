@@ -1,5 +1,5 @@
-# Project Name
-Places, a best activities and experience finder for travellers.
+# Places
+Places, the best activities and experience finder for travellers.
 
 ![screenshot](./public/detail.png)
 
