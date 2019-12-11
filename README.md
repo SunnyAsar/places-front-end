@@ -28,10 +28,10 @@ See the [Backend](https://github.com/SunnyAsar/places) repo to get the server si
 `Clone the project and cd into the directory`
 
 ### Install
-`run npm i` to install all the dependencies of the project
+run `npm i` to install all the dependencies of the project
 
 ### Usage
-`run npm start` to get the project run and see it in action at 
+run `npm start` to get the project run and see it in action at 
 
 
 ## Authors
