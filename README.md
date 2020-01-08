@@ -1,9 +1,9 @@
 # Places
-Places, the best activities and experience finder for travellers.
+Places, the best activities and experience finder for travelers.
 
 ![screenshot](./public/detail.png)
 
-Places is an app to assit travelers, tourist or digital normads find new activities and experiences in cities they find themselves in and also give them the best price deals.
+Places is an app to assist travelers, tourist or digital nomads find new activities and experiences in cities they find themselves in and also give them the best price deals.
 
 ## Built With
 
@@ -14,8 +14,6 @@ Places is an app to assit travelers, tourist or digital normads find new activit
 
 ## Getting Started
 
-**This is what needs to be done to  on set up this project locally.**
-
 
 To get a local copy up and running follow these simple example steps.
 
@@ -25,13 +23,13 @@ You will need to have `node` installed in other to use `npm` which will be neede
 See the [Backend](https://github.com/SunnyAsar/places) repo to get the server side app to make this repo dynamic 
 
 ### Setup
-`Clone the project and cd into the directory`
+Clone the project `git clone https://github.com/SunnyAsar/places-front-end` and `cd into the directory`
 
 ### Install
 run `npm i` to install all the dependencies of the project
 
 ### Usage
-run `npm start` to get the project run and see it in action at 
+run `npm start` to get the project running locally.
 
 
 ## Authors
@@ -39,13 +37,13 @@ run `npm start` to get the project run and see it in action at
 👤 **Author**
 
 - Github: [@SunnyAsar](https://github.com/SunnyAsar)
-- Linkedin: [Sunny Asar](https://www.linkedin.com/in/sunny-asar-905648101/)
+- Linkedin: [Sunny Asar](https://www.linkedin.com/in/sunnyasar/)
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/SunnyAsar/places-front-end/issues).
 
 ## Show your support
 
