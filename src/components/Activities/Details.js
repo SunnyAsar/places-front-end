@@ -47,7 +47,7 @@ class Detail extends Component {
             <div className="overlay d-flex align-items-center text-center">
               <div className="container ">
                 <h1 className=" display-4 text-light text-uppercase">{activity.name}</h1>
-                <p className="lead text-warning">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                {/* <p className="lead text-warning">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> */}
               </div>
             </div>
             <div className="row">
