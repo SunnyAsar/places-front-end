@@ -1,11 +1,11 @@
 import { START_LOADER, STOP_LOADER, SET_ERRORS, CLEAR_ERRORS } from '../actions/actionConstants'
 
-const initialState = {
+const UiState = {
   loading: false,
   errors: {}
 }
 
-const loading = (state = initialState, action) => {
+const loading = (state = UiState, action) => {
   switch (action.type) {
     case START_LOADER:
       return { ...state, loading: true }
@@ -24,7 +24,7 @@ const loading = (state = initialState, action) => {
         errors: {}
       }
     default:
-      return state
+      return UiState
   }
 }
 

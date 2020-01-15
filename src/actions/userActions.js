@@ -9,29 +9,31 @@ export const loginUser = (userData, history) => {
     dispatch({ type: START_LOADER })
     axios.post(`${BASE_URL}/auth/login`, userData)
       .then(res => {
-        console.log(res.data)
         const { data: { token } } = res
-        const { data: { user: { id, first_name, last_name, email, created_at } } } = res
-        const userData = {
-          token,
-          first_name,
-          last_name,
-          email,
-          id,
-          created_at
-        }
-        // storeUser(JSON.stringify(token))
         localStorage.setItem('Token', token)
-        localStorage.setItem('User', JSON.stringify(userData))
         axios.defaults.headers.common['Authorization'] = token
+        dispatch(getUser())
         dispatch({ type: STOP_LOADER })
-        dispatch({ type: SET_USER, payload: userData })
         history.push('/')
       })
       .catch((err) => {
-        console.log(err)
         dispatch({ type: SET_ERRORS, payload: err.response.data })
         dispatch({ type: STOP_LOADER })
+      })
+  }
+}
+
+export const getUser = () => {
+  console.log('getting user')
+  return (dispatch) => {
+    axios.get(`${BASE_URL}/user`, { headers: { Authorization: localStorage.Token } })
+      .then(res => {
+        console.log(res.data)
+        dispatch({ type: SET_USER, payload: res.data })
+      })
+      .catch(err => {
+        console.log(err.response.data)
+        dispatch({ type: SET_ERRORS })
       })
   }
 }
@@ -53,22 +55,6 @@ export const signUpUser = (userData, history) => {
         dispatch({ type: STOP_LOADER })
       })
   }
-}
-
-const storeUser = (token) => {
-  localStorage.setItem('Token', token)
-  const code = jwt_decode(token)
-  const { email, first_name, last_name, id } = JSON.parse(code.userData)
-  const user = {
-    id,
-    email,
-    first_name,
-    last_name,
-    exp: code.exp,
-    token: localStorage.Token
-  }
-  localStorage.setItem('User', JSON.stringify(user))
-  console.log(id)
 }
 
 export const logOutUser = () => {

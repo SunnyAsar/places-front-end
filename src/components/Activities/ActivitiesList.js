@@ -7,8 +7,8 @@ import Loader from '../layout/Loader'
 import { Redirect } from 'react-router-dom'
 // import headerImage from '../../assets/images/header.jpg'
 import home1 from '../../assets/images/reg.jpg'
-// import home2 from '../../assets/images/home2.jpg'
-// import { Current } from '../../index'
+
+import axios from 'axios'
 
 const Content = styled.div`
   background: url(${home1});
@@ -50,13 +50,13 @@ class ActivitiesList extends Component {
 
   render () {
     if (!localStorage.getItem('Token')) return <Redirect to='/login'/>
-    const { userData } = this.props
+    const { user } = this.props
     const ActivityList = (this.props.activities.length > 0) ? (this.props.activities.map(activity => (<Activity activity={activity} key={activity.id} />))) : (this.props.loading) ? (<Loader/>) : (<h3>There are no Listing now!</h3>)
     return (
       <Content>
         <div className="overlay d-flex align-items-center text-center">
           <div className="container ">
-            <h1 className="display-4 text-light">Top Activites. Curated Just for You.{this.props.user.first_name} { userData.first_name }</h1>
+            <h1 className="display-4 text-light">Top Activites. Curated Just for You.{this.props.user.first_name} { user.first_name }</h1>
             <p className="lead text-warning">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
             <div className="row justify-content-center sticky-top">
               <div className="col-md-6">
@@ -89,20 +89,13 @@ class ActivitiesList extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchActivities: () => dispatch(fetchActivities()),
-    // getUser: () => dispatch(getUser())
-  }
-}
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    user: state.user.credentials,
     authenticated: state.user.authenticated,
     loading: state.UI.loading,
-    activities: state.data.activities,
-    userData: JSON.parse(localStorage.User)
+    activities: state.data.activities
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesList)
+export default connect(mapStateToProps, { fetchActivities })(ActivitiesList)

@@ -1,27 +1,27 @@
 
-import { SET_USER, UN_AUTHENTICATE_USER } from "../actions/actionConstants"
+import { SET_USER, UN_AUTHENTICATE_USER } from '../actions/actionConstants'
 
-const initialState = {
-  // token: '',
-  // first_name: '',
-  // last_name: '',
-  // email: '',
-  // id: '',
-  // created_at: ''
-
+const userState = {
+  authenticated: false,
+  credentials: {}
 }
 
-const user = (state = initialState, action) => {
+const user = (state = userState, action) => {
   switch (action.type) {
     case SET_USER:
-      return action.payload
+      return {
+        ...state,
+        authenticated: true,
+        credentials: action.payload
+      }
     case UN_AUTHENTICATE_USER:
       return {
         ...state,
-        initialState
+        authenticated: false,
+        credentials: {}
       }
     default:
-      return initialState
+      return state
   }
 }
 

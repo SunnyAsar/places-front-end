@@ -64,7 +64,7 @@ handleSubmit = (e) => {
 
   render () {
 
-    // if(localStorage.getItem('Token')) return <Redirect to='/'/>
+    if(localStorage.getItem('Token')) return <Redirect to='/'/>
     // const { UI: { loading, errors: { password,email } }}  = this.props 
     const { UI: { loading }}  = this.props 
     const { errors: { password,email }} = this.state
@@ -98,9 +98,9 @@ handleSubmit = (e) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) =>({
-  loginUser: (user, history) => dispatch(loginUser(user, history))
-})
+// const mapDispatchToProps = (dispatch) =>({
+//   loginUser: (user, history) => dispatch(loginUser(user, history))
+// })
 
 const mapStateToProps = (state) => ({
   userAccount: state.authentication,
@@ -108,5 +108,5 @@ const mapStateToProps = (state) => ({
   UI: state.UI
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+export default connect(mapStateToProps, {loginUser})(SignIn)
 

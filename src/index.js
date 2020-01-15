@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
@@ -9,29 +10,22 @@ import rootReducer from './reducers'
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import * as jwt_decode from 'jwt-decode'
+import { UN_AUTHENTICATE_USER } from './actions/actionConstants'
+import { logOutUser, getUser } from './actions/userActions'
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+const store = createStore(rootReducer, {}, composeWithDevTools(applyMiddleware(thunk)))
 
-// export const Current = () => {
-//   let current_user
-//   if (localStorage.Token) {
-//     const code = jwt_decode(localStorage.Token)
-//     const { email, first_name, last_name, id } = code.userData
-//     const user = {
-//       id,
-//       email,
-//       first_name,
-//       last_name,
-//       exp: code.exp,
-//       token: localStorage.Token
-//     }
-//     store.dispatch({ type: 'SET_USER', payload: user })
-//     current_user = user
-//   }
-//   return current_user
-// }
-// const user1 = localStorage.User
-// console.log(JSON.parse(localStorage.User))
+const token = localStorage.Token
+if (token) {
+  const decoded = jwt_decode(token)
+  const now = Date.now()
+  const token_time = decoded.exp * 1000
+  if (token_time < now) {
+    store.dispatch(logOutUser())
+  } else {
+    store.dispatch(getUser())
+  }
+}
 
 ReactDOM.render(
   <Provider store={ store }>
