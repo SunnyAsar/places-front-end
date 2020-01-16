@@ -1,14 +1,13 @@
+/* eslint-disable no-unused-vars */
 import React, { Component } from 'react'
 import { fetchActivities } from '../../actions/dataActions'
 import { connect } from 'react-redux'
-import styled from  '@emotion/styled'
+import styled from '@emotion/styled'
 import Activity from './Activity'
 import Loader from '../layout/Loader'
 import { Redirect } from 'react-router-dom'
 // import headerImage from '../../assets/images/header.jpg'
 import home1 from '../../assets/images/reg.jpg'
-
-import axios from 'axios'
 
 const Content = styled.div`
   background: url(${home1});
@@ -56,7 +55,7 @@ class ActivitiesList extends Component {
       <Content>
         <div className="overlay d-flex align-items-center text-center">
           <div className="container ">
-            <h1 className="display-4 text-light">Top Activites. Curated Just for You.{this.props.user.first_name} { user.first_name }</h1>
+            <h1 className="display-4 text-light">Top Activites. Curated Just for You. { user.first_name }</h1>
             <p className="lead text-warning">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
             <div className="row justify-content-center sticky-top">
               <div className="col-md-6">

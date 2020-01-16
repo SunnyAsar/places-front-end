@@ -1,5 +1,4 @@
 import axios from 'axios'
-import * as jwt_decode from 'jwt-decode'
 import { SET_ERRORS, SET_USER, START_LOADER, STOP_LOADER, CLEAR_ERRORS, UN_AUTHENTICATE_USER } from './actionConstants'
 const BASE_URL = 'http://localhost:4000'
 
@@ -61,7 +60,7 @@ export const logOutUser = () => {
   return (dispatch) => {
     console.log('going out .......')
     localStorage.removeItem('Token')
-    // dispatch({ type: UN_AUTHENTICATE_USER })
+    dispatch({ type: UN_AUTHENTICATE_USER })
     window.location.href = '/login'
   }
 }

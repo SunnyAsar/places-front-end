@@ -10,7 +10,6 @@ import rootReducer from './reducers'
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import * as jwt_decode from 'jwt-decode'
-import { UN_AUTHENTICATE_USER } from './actions/actionConstants'
 import { logOutUser, getUser } from './actions/userActions'
 
 const store = createStore(rootReducer, {}, composeWithDevTools(applyMiddleware(thunk)))
