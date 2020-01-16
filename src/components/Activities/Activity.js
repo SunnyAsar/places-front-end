@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-// import axios from 'axios'
 
 class Activity extends Component {
   render () {
     const { activity } = this.props
-    // const name = activity.category.name !==  ? (activity.category.name) : 'general'
-    // let image
-
     return (
       <div className="col-md-4 image-area mb-4">
         <div className="card mt-0 ">
@@ -34,8 +30,6 @@ class Activity extends Component {
               <span className="col-md">
                 <h5 className=" h6 card-title mb-1 text-dark bold">{activity.name}</h5>
               </span>
-
-              {/* <p className="h3 small card-text">Some quick example text to build </p> */}
             </div>
             <Link to={`/activities/${activity.id}`} className="btn btn-outline-primary btn-block btn-sm">See it!</Link>
           </div>
