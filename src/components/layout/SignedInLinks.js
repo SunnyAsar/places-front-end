@@ -11,6 +11,9 @@ const SignedInLinks = ({ logOutUser }) => {
           <Link to="/help" className="nav-link">Profile</Link>
         </li>
         <li className="nav-item">
+          <Link to="/activity/new" className="nav-link">Add Activity</Link>
+        </li>
+        <li className="nav-item">
           <a onClick={logOutUser} className="nav-link">Log Out</a>
         </li>
       </ul>
