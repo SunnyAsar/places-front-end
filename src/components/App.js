@@ -5,12 +5,7 @@ import SignUp from './Auth/SignUp'
 import SignIn from './Auth/SignIn'
 import ActivitiesList from './Activities/ActivitiesList'
 import Detail from './Activities/Details'
-
-// import axios from 'axios'
-// const token = localStorage.getItem('Token')
-// if (token) {
-//   axios.defaults.headers.common['Authorization'] = token
-// }
+import AddActivty from './Activities/AddActivivty'
 
 function App () {
   return (
@@ -21,6 +16,7 @@ function App () {
         <Route path='/signup' component={SignUp} />
         <Route path='/login' component={SignIn} />
         <Route path='/activities/:id' component={Detail} />
+        <Route path='/activity/new' component={AddActivty} />
       </Switch>
     </Router>
   )
