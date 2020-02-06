@@ -1,4 +1,4 @@
-import { SET_ACTIVITIES, START_LOADER, STOP_LOADER, SET_ERRORS, SET_ACTIVITY, SET_COMMENTS, SET_COMMENT } from './actionConstants'
+import { SET_ACTIVITIES, POST_ACTIVITY, START_LOADER, STOP_LOADER, SET_ERRORS, SET_ACTIVITY, SET_COMMENTS, SET_COMMENT } from './actionConstants'
 import axios from 'axios'
 
 const BASE_URL = 'http://localhost:4000'
@@ -53,5 +53,17 @@ export const postComment = (data, activityId) => {
     }).catch(err => {
       console.log(err.response.data)
     })
+  }
+}
+
+export const postActivity = (data) => {
+  return dispatch => {
+    axios.post(`${BASE_URL}/activities`, { headers: { Authorization: localStorage.Token } })
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err.response.data)
+      })
   }
 }
