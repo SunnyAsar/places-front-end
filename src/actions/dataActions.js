@@ -1,6 +1,6 @@
 import {
   SET_ACTIVITIES,
-  POST_ACTIVITY,
+  ADD_ACTIVITY,
   SET_ACTIVITY_CATEGORIES,
   START_LOADER,
   STOP_LOADER,
@@ -92,12 +92,13 @@ export const postComment = (data, activityId) => {
 export const postActivity = (data) => {
   return (dispatch) => {
     axios
-      .post(`${BASE_URL}/activities`, { headers: { Authorization: localStorage.Token } })
+      .post(`${BASE_URL}/activities`, data, { headers: { Authorization: localStorage.Token } })
       .then((res) => {
         console.log(res.data)
+        dispatch({ type: ADD_ACTIVITY, payload: res.data })
       })
       .catch((err) => {
-        console.log(err.response.data)
+        console.log(err)
       })
   }
 }

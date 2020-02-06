@@ -1,7 +1,7 @@
 import {
   SET_ACTIVITY_CATEGORIES,
   SET_ACTIVITIES,
-  POST_ACTIVITY,
+  ADD_ACTIVITY,
   SET_ACTIVITY,
   SET_COMMENTS,
   SET_COMMENT
@@ -31,7 +31,7 @@ const activites = (state = initialState, action) => {
         ...state,
         activity: action.payload
       }
-    case POST_ACTIVITY:
+    case ADD_ACTIVITY:
       return {
         ...state,
         activites: [...action.payload, ...activites]

@@ -5,13 +5,14 @@ import * as Yup from 'yup'
 import { connect } from 'react-redux'
 
 import { fetchCategories } from '../../actions/dataActions'
+import { postActivity } from '../../actions/dataActions'
 
 const Content = styled.div`
   width: 70%;
   margin: auto;
 `
 const validation = Yup.object({
-  title: Yup.string().min(4, 'Must be 4 characters or more').required('Required'),
+  name: Yup.string().min(4, 'Must be 4 characters or more').required('Required'),
   description: Yup.string().min(20, 'must be 20 characters or more').required('Required'),
   country: Yup.string().min(5, 'Country must be at least 5 characters').required('Required'),
   city: Yup.string().min(4, 'City name must be at least 4 characters').required('Required'),
@@ -47,17 +48,42 @@ class AddActivity extends Component {
       <Content className="container">
         <h1 className="text-center h3 pt-4 mb-5 text-warning"> Add Activity</h1>
         <Formik
-          initialValues={{ title: '', description: '', country: '', city: '', amount: null, thumbnail: '' }}
+          initialValues={{
+            name: '',
+            description: '',
+            country: '',
+            city: '',
+            category_id: '',
+            amount: 0,
+            thumbnail: ''
+          }}
           validationSchema={validation}
           onSubmit={(values, { setSubmitting }) => {
+            setSubmitting(true)
+
+            const formData = new FormData()
+            formData.append('name', values.name)
+            formData.append('description', values.description)
+            formData.append('country', values.country)
+            formData.append('city', values.city)
+            formData.append('category_id', values.category_id)
+            formData.append('amount', values.amount)
+            formData.append('thumbnail', values.thumbnail)
+
+            // for (let i = 0; i < values.images.length; i++) {
+            //   formData.append(`images[${i}]`, values.images[i])
+            // }
+            console.log({ activity: formData.get('name') })
             console.log(values)
+            // this.props.AddActivity({ activity: formData })
+            this.props.AddActivity({ activity: values })
             setSubmitting(false)
           }}
         >
           {({ isSubmitting }) => (
             <Form>
               <div className="form-group">
-                <MyTextInput label="Title" name="title" placeholder="Enter a Title" type="text" />
+                <MyTextInput label="Activity name" name="name" placeholder="Enter a Name" type="text" />
               </div>
 
               <div className="form-group">
@@ -100,7 +126,7 @@ class AddActivity extends Component {
                     <Field name="category_id" type="text" as="select" placeholder="category" className="form-control">
                       {categories}
                     </Field>
-                    <ErrorMessage name="thumbnail" component="div" className="text-danger pl-2" />
+                    <ErrorMessage name="category_id" component="div" className="text-danger pl-2" />
                   </div>
                 </div>
               </div>
@@ -135,9 +161,8 @@ class AddActivity extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCategories: () => {
-      dispatch(fetchCategories())
-    }
+    fetchCategories: () => dispatch(fetchCategories()),
+    AddActivity: (data) => dispatch(postActivity(data))
   }
 }
 const mapStateToProps = (state) => {

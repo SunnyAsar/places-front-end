@@ -1,4 +1,3 @@
-
 export const SIGN_UP = 'SIGN_UP'
 export const SIGN_IN = 'SIGN_IN'
 
@@ -17,7 +16,7 @@ export const UN_AUTHENTICATE_USER = 'UN_AUTHENTICATE_USER'
 
 export const SET_ACTIVITIES = 'SET_ACTIVITIES'
 export const SET_ACTIVITY = 'SET_ACTIVITY'
-export const POST_ACTIVITY = 'POST_ACTIVITY'
+export const ADD_ACTIVITY = 'ADD_ACTIVITY'
 
 export const SET_ACTIVITY_CATEGORIES = 'SET_ACTIVITY_CATEGORIES'
 
