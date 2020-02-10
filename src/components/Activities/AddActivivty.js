@@ -32,6 +32,19 @@ const MyTextInput = ({ label, ...props }) => {
   )
 }
 
+const MyFileUpload = ({ label, ...props }) => {
+  const [field, meta] = useField(props)
+  return (
+    <div>
+      <label htmlFor={props.id || props.name} className="">
+        {label}
+      </label>
+      <input className="text-input form-control" {...field} {...props} multiple />
+      {meta.touched && meta.error ? <div className="error text-danger pl-2">{meta.error}</div> : null}
+    </div>
+  )
+}
+
 class AddActivity extends Component {
   componentDidMount () {
     this.props.fetchCategories()
@@ -55,11 +68,12 @@ class AddActivity extends Component {
             city: '',
             category_id: '',
             amount: 0,
-            thumbnail: ''
+            thumbnail: '',
+            images: []
           }}
           validationSchema={validation}
-          onSubmit={(values, { setSubmitting }) => {
-            setSubmitting(true)
+          onSubmit={(values, { isSubmitting }) => {
+            // setSubmitting(true)
 
             const formData = new FormData()
             formData.append('name', values.name)
@@ -69,19 +83,21 @@ class AddActivity extends Component {
             formData.append('category_id', values.category_id)
             formData.append('amount', values.amount)
             formData.append('thumbnail', values.thumbnail)
+            formData.append('images', values.images)
 
-            // for (let i = 0; i < values.images.length; i++) {
-            //   formData.append(`images[${i}]`, values.images[i])
-            // }
-            console.log({ activity: formData.get('name') })
+            for (let i = 0; i <= values.images.length; i++) {
+              formData.append(`images[${i}]`, values.images[i])
+            }
+            // console.log({ activity: formData.get('name') })
+            console.log(formData)
             console.log(values)
-            // this.props.AddActivity({ activity: formData })
             this.props.AddActivity({ activity: values })
-            setSubmitting(false)
+            // this.props.AddActivity({ activity: values })
+            // setSubmitting(false)
           }}
         >
           {({ isSubmitting }) => (
-            <Form>
+            <Form encType="multipart/form-data">
               <div className="form-group">
                 <MyTextInput label="Activity name" name="name" placeholder="Enter a Name" type="text" />
               </div>
@@ -140,7 +156,7 @@ class AddActivity extends Component {
                 </div>
                 <div className="col-md-6">
                   <div className="form-group">
-                    <Field name="images" type="file" multiple placeholder="Activity Images" className="form-control" />
+                    <Field name="images" type="file" placeholder="Activity Images" multiple className="form-control" />
                     <ErrorMessage name="images" component="div" className="text-danger pl-2" />
                   </div>
                 </div>
