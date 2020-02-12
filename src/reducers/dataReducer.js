@@ -34,7 +34,7 @@ const activites = (state = initialState, action) => {
     case ADD_ACTIVITY:
       return {
         ...state,
-        activites: [...action.payload, ...activites]
+        activities: [action.payload, ...state.activities]
       }
     case SET_COMMENTS:
       return {

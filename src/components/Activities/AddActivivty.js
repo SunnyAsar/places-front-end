@@ -9,6 +9,7 @@ import { useDropzone } from 'react-dropzone'
 import { fetchCategories } from '../../actions/dataActions'
 import { postActivity } from '../../actions/dataActions'
 
+import axios from 'axios'
 const Content = styled.div`
   width: 70%;
   margin: auto;
@@ -18,7 +19,8 @@ const validation = Yup.object({
   description: Yup.string().min(2, 'must be 20 characters or more').required('Required'),
   country: Yup.string().min(5, 'Country must be at least 5 characters').required('Required'),
   city: Yup.string().min(4, 'City name must be at least 4 characters').required('Required'),
-  thumbnail: Yup.string().required('Required')
+  thumbnail: Yup.string().required('Required'),
+  images: Yup.string().required('Required')
 })
 
 const MyTextInput = ({ label, ...props }) => {
@@ -84,27 +86,21 @@ class AddActivity extends Component {
             images: []
           }}
           validationSchema={validation}
-          onSubmit={(values, { isSubmitting, setSubmitting }) => {
+          onSubmit={(values, { setSubmitting }) => {
             setSubmitting(true)
 
-            let formData = new FormData()
-            formData.append('name', values.name)
-            formData.append('description', values.description)
-            formData.append('country', values.country)
-            formData.append('city', values.city)
-            formData.append('category_id', values.category_id)
-            formData.append('amount', values.amount)
-            formData.append('thumbnail', values.thumbnail)
-            formData.append('images', values.images)
-
-            // for (let i = 0; i <= values.images.length; i++) {
-            //   formData.append(`images[${i}]`, values.images[i])
-            // }
-            // console.log({ activity: formData.get('name') })
-            // // console.log(formData.get('images'))
-            console.log(values)
-            this.props.AddActivity({ activity: values })
-            // this.props.AddActivity({ activity: ...formData })
+            const formdata = new FormData()
+            formdata.append('[activity]name', values.name)
+            formdata.append('[activity]description', values.description)
+            formdata.append('[activity]country', values.country)
+            formdata.append('[activity]city', values.city)
+            formdata.append('[activity]category_id', values.category_id)
+            formdata.append('[activity]amount', values.amount)
+            formdata.append('[activity]thumbnail', values.thumbnail)
+            values.images.forEach((files, i) => {
+              formdata.append(`[activity]images`, files)
+            })
+            this.props.AddActivity(formdata)
             setSubmitting(false)
           }}
         >
@@ -173,39 +169,32 @@ class AddActivity extends Component {
                         <section>
                           <div {...getRootProps()}>
                             <input {...getInputProps()} />
-                            <p>Drag 'n' drop some files here, or click to select files</p>
+                            <p>Drag 'n' drop a thumbnail, or click to select files</p>
                           </div>
                         </section>
                       )}
                     </Dropzone>
-
-                    {/* <input id="thumbnail" name="thumbnail" type="file" onChange={(event) => {
-                      setFieldValue('thumbnail', event.currentTarget.files[0])
-                    }} className="form-control" /> */}
-                    {/* <Field name="thumbnail" type="file" placeholder="Thumbnail Image" className="form-control" /> */}
                     <ErrorMessage name="thumbnail" component="div" className="text-danger pl-2" />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="form-group">
-                    {/* <Field name="images" type="file" placeholder="Activity Images" multiple className="form-control" /> */}
-                    {/* <ErrorMessage name="images" component="div" className="text-danger pl-2" /> */}
-
                     <Dropzone
                       onDrop={(acceptedFiles) => {
                         console.log(acceptedFiles)
-                        setFieldValue('images', values.images.concat(acceptedFiles))
+                        setFieldValue('images', acceptedFiles)
                       }}
                     >
                       {({ getRootProps, getInputProps }) => (
                         <section>
                           <div {...getRootProps()}>
                             <input {...getInputProps()} />
-                            <p>Drag 'n' drop some files here, or click to select files</p>
+                            <p>Drag 'n' drop some Images here, or click to select files</p>
                           </div>
                         </section>
                       )}
                     </Dropzone>
+                    <ErrorMessage name="thumbnail" component="div" className="text-danger pl-2" />
 
                     {values.images &&
                       values.images.map((file, i) => (
@@ -223,6 +212,7 @@ class AddActivity extends Component {
             </Form>
           )}
         </Formik>
+
       </Content>
     )
   }

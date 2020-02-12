@@ -98,6 +98,7 @@ export const postActivity = (data) => {
       .then((res) => {
         console.log(res.data)
         dispatch({ type: ADD_ACTIVITY, payload: res.data })
+        window.location.href = '/'
       })
       .catch((err) => {
         console.log(err)
