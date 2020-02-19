@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import Header from './layout/Header'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import SignUp from './Auth/SignUp'
@@ -6,17 +6,19 @@ import SignIn from './Auth/SignIn'
 import ActivitiesList from './Activities/ActivitiesList'
 import Detail from './Activities/Details'
 import AddActivty from './Activities/AddActivivty'
+import CompleteReservation from './Reservation/CompleteReservation'
 
 function App () {
   return (
     <Router>
-      <Header/>
+      <Header />
       <Switch>
-        <Route exact path='/' component={ActivitiesList} />
-        <Route path='/signup' component={SignUp} />
-        <Route path='/login' component={SignIn} />
-        <Route path='/activities/:id' component={Detail} />
-        <Route path='/activity/new' component={AddActivty} />
+        <Route exact path="/" component={ActivitiesList} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/login" component={SignIn} />
+        <Route path="/activities/:id" component={Detail} />
+        <Route path="/activity/new" component={AddActivty} />
+        <Route path="/complete_reservation" component={CompleteReservation} />
       </Switch>
     </Router>
   )
